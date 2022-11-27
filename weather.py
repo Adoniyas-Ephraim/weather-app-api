@@ -1,28 +1,29 @@
-import requests
-import pygame
-import time as t
-import sys
-
-pygame.init()
-
-def get_ip():
-    response = requests.get('https://api64.ipify.org?format=json').json()
-    return response["ip"]
-
-def get_location():
-    ip_address = get_ip()
-    response = requests.get(f'https://ipapi.co/{ip_address}/json/').json()
-    location_data = {
-        "city": response.get("city"),
-    }
-    return location_data['city']
-
-
-location = (get_location())
-
-api_key = '30d4741c779ba94c470ca1f63045390a'
-
 def data(): 
+    import requests
+    import pygame
+    import time as t
+    import sys
+
+    pygame.init()
+
+    def get_ip():
+        response = requests.get('https://api64.ipify.org?format=json').json()
+        return response["ip"]
+
+    def get_location():
+        ip_address = get_ip()
+        response = requests.get(f'https://ipapi.co/{ip_address}/json/').json()
+        location_data = {
+            "city": response.get("city"),
+        }
+        return location_data['city']
+
+
+    location = (get_location())
+
+    api_key = '30d4741c779ba94c470ca1f63045390a'
+
+
     weather_data = requests.get(
         f"https://api.openweathermap.org/data/2.5/weather?q={location}&units=imperial&APPID={api_key}")
 
